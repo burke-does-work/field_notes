@@ -1,3 +1,9 @@
+---
+title: "Talking Points and Teasers on Energy for Data Centers"
+date: "2025-08-03"
+tags: ["Energy", "Data Centers"]
+---
+
 # Field Notes: Talking Points and Teasers on Energy for Data Centers
 
 Purpose: talking points on challenges and opportunities in energy for data centers. You already know the background - use these bullets to talk to the issues at a high level.
