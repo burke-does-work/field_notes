@@ -53,12 +53,10 @@ Talking points are a high-level outline to be both basic and comprehensive. Some
 
 Recession proofing for periods of overcapacity. Flexibility to scale down energy costs or target different data center use cases (i.e. not just tuned for model training)
 
-![decrepid data center](media/decrepid_data_center.jpg)
+![decrepid data center](../media/decrepid_data_center.jpg)
 
 ## Deeper
 
 [PJM, Google partner to speed grid interconnection using AI](https://www.utilitydive.com/news/pjm-google-tapestry-grid-interconnection-ai/744982/)
 
 [Cheyenne to host massive AI data center using more electricity than all Wyoming homes combined](https://apnews.com/article/ai-artificial-intelligence-data-center-electricity-wyoming-cheyenne-44da7974e2d942acd8bf003ebe2e855a)
-
-[PJM, Google partner to speed grid interconnection using AI](https://www.utilitydive.com/news/pjm-google-tapestry-grid-interconnection-ai/744982/)
