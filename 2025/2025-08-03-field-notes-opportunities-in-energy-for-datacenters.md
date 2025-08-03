@@ -46,9 +46,8 @@ In a bull market, opportunities exist across the value chain.
 
 Talking points are a high-level outline to be both basic and comprehensive. Some unorganized, unrefined ideas:
 
-Independent data centers offering full renewable power supply.
-
-Solutions to speed up the interconnection queue.
+- Independent data centers offering full renewable power supply.
+- Solutions to speed up the interconnection queue.
 
 ### Throw-away thought: Recession proofing
 
