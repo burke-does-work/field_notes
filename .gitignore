@@ -2,3 +2,6 @@
 
 .vscode/
 media/
+working/
+.venv/
+.python-version
