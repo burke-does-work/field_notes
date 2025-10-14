@@ -27,8 +27,6 @@ There's no restriction on entry length (long or short).
 
 ## Key Features
 
-Workflow generally follows "docs as code" concepts.
-
 ### Current features and workflow
 
 - Write notebook entries in Markdown in the `working` directory.
