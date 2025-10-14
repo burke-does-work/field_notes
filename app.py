@@ -17,7 +17,7 @@ from helper_scripts.publish_note import (
 )
 
 # Initialize the Flask application
-app = Flask(__name__, static_folder='pages/static', static_url_path='/static')
+app = Flask(__name__, template_folder='pages', static_folder='pages/static', static_url_path='/static')
 
 
 def display_file_list_with_metadata(working_files):
@@ -307,13 +307,16 @@ def main_menu_loop():
 
 # Flask routes
 
-# TODO: Determine the routing structure for serving multiple field notes
-# TODO: Create an index page that lists all available field notes
 @app.route("/")
 def home():
     """Homepage route - serves the index page"""
-    # TODO: Update to serve the actual homepage (pages/index.html)
     return render_template('index.html')
+
+
+@app.route("/<path:year>/<path:filename>")
+def serve_note(year, filename):
+    """Serve individual field note HTML files"""
+    return render_template(f'{year}/{filename}')
 
 
 if __name__ == "__main__":
