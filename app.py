@@ -17,7 +17,7 @@ from helper_scripts.publish_note import (
 )
 
 # Initialize the Flask application
-app = Flask(__name__)
+app = Flask(__name__, static_folder='pages/static', static_url_path='/static')
 
 
 def display_file_list_with_metadata(working_files):
@@ -177,10 +177,10 @@ def publish_and_convert_workflow():
             if result['images_moved'] or result['images_copied']:
                 print("  Images processed:")
                 for img in result['images_moved']:
-                    print(f"  ✓ Moved: {img} → static/media/")
+                    print(f"  ✓ Moved: {img} → pages/static/media/")
                     print(f"    (unique to this file)")
                 for img, count in result['images_copied']:
-                    print(f"  ✓ Copied: {img} → static/media/")
+                    print(f"  ✓ Copied: {img} → pages/static/media/")
                     print(f"    (shared - used in {count} files, kept in working/)")
                 print()
 

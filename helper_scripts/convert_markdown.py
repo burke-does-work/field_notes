@@ -10,7 +10,7 @@ from pathlib import Path
 # Define the base directories used for conversion
 MARKDOWN_DIR = "markdown"
 PAGES_DIR = "pages"
-HTML_TEMPLATE_FILE = "static/template.html"
+HTML_TEMPLATE_FILE = "pages/static/template.html"
 
 
 def convert_markdown_to_html_with_pandoc(markdown_file, html_output_file):

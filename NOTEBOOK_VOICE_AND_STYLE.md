@@ -63,6 +63,8 @@ Markdown: [Field Notebook - Markdown Style Guide](MARKDOWN_STYLE_GUIDE.md)
 
 Function doc strings: [Google Python Style Guide: Comments and Docstrings](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
 
+Commits: [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
 ### Language
 
 Use these style guides in the following order:

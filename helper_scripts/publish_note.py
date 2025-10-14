@@ -13,7 +13,7 @@ from pathlib import Path
 # Configuration
 WORKING_DIR = "working"
 MARKDOWN_DIR = "markdown"
-STATIC_MEDIA_DIR = "static/media"
+STATIC_MEDIA_DIR = "pages/static/media"
 
 
 def find_markdown_files(working_dir=WORKING_DIR):
