@@ -2,6 +2,9 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 h1, h2, h3, h4, h5 {
@@ -10,10 +13,14 @@ h1, h2, h3, h4, h5 {
 
 h1 {
     font-size: 2.5em;
+    background-color: #8B1538;
+    color: white;
+    padding: 10px;
 }
 
 h2 {
     font-size: 2em;
+    border-bottom: 1px solid #333;
 }
 
 h3 {
@@ -26,4 +33,21 @@ h4 {
 
 h5 {
     font-size: 1em;
+}
+
+/* Remove default browser margins and center figure content */
+figure {
+    margin: 0;
+    text-align: center;
+}
+
+/* Style images with borders and constrain width */
+img {
+    display: block;
+    max-width: 95%;
+    height: auto;
+    margin: 0 auto;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 10px 0;
 }
