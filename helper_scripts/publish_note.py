@@ -11,12 +11,12 @@ from pathlib import Path
 
 
 # Configuration
-WORKING_DIR = "working"
-MARKDOWN_DIR = "markdown"
+WORKING_STAGED_DIR = "working/pages_markdown_staged"
+MARKDOWN_DIR = "docs/pages_markdown"
 STATIC_MEDIA_DIR = "docs/static/media"
 
 
-def find_markdown_files(working_dir=WORKING_DIR):
+def find_markdown_files(working_dir=WORKING_STAGED_DIR):
     """
     Find all markdown files in the working directory
 
@@ -136,7 +136,7 @@ def extract_image_filename(image_path):
     return Path(image_path).name
 
 
-def count_image_usage(image_filename, working_dir=WORKING_DIR):
+def count_image_usage(image_filename, working_dir=WORKING_STAGED_DIR):
     """
     Count how many markdown files reference a specific image
 
@@ -290,9 +290,9 @@ def publish_note(source_path, dry_run=False):
             result['error'] = f"Source file not found: {source_path}"
             return result
 
-        # Validate source is in working directory
-        if not str(source_path).startswith(WORKING_DIR):
-            result['error'] = f"Source file must be in {WORKING_DIR}/ directory"
+        # Validate source is in working/staged directory
+        if not str(source_path).startswith(WORKING_STAGED_DIR):
+            result['error'] = f"Source file must be in {WORKING_STAGED_DIR}/ directory"
             return result
 
         # Read source content
@@ -311,10 +311,10 @@ def publish_note(source_path, dry_run=False):
         # Find image references
         image_refs = find_image_references(original_content)
 
-        # Calculate destination path (maintain directory structure)
-        # working/2025/note.md → markdown/2025/note.md
-        relative_path = source_path.relative_to(WORKING_DIR)
-        dest_path = Path(MARKDOWN_DIR) / relative_path
+        # Calculate destination path (flat structure)
+        # working/pages_markdown_staged/note.md → docs/pages_markdown/note.md
+        filename = source_path.name
+        dest_path = Path(MARKDOWN_DIR) / filename
         result['destination_path'] = str(dest_path)
 
         if dry_run:
@@ -328,17 +328,21 @@ def publish_note(source_path, dry_run=False):
             filename = extract_image_filename(image_path)
 
             # Find source image file
-            # Look in same directory as markdown file
-            source_dir = source_path.parent
-            source_image = source_dir / "media" / filename
+            # Image paths in markdown are like ./media/image.jpg or media/image.jpg
+            # Look in working/static/media/ directory
+            source_image = Path("working/static/media") / filename
 
             if not source_image.exists():
                 result['images_missing'].append(filename)
                 result['warnings'].append(f"Image not found: {source_image}")
                 continue
 
-            # Count usage across working directory
-            usage_count = count_image_usage(filename, WORKING_DIR)
+            # Count usage across all working markdown (staged + pages_markdown)
+            # Count in staged area
+            staged_count = count_image_usage(filename, WORKING_STAGED_DIR)
+            # Count in working pages_markdown area
+            working_count = count_image_usage(filename, "working/pages_markdown")
+            usage_count = staged_count + working_count
 
             # Destination for image
             dest_image = Path(STATIC_MEDIA_DIR) / filename

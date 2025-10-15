@@ -130,11 +130,11 @@ def publish_and_convert_workflow():
     print("=" * 60)
 
     # Step 1: Find working files
-    working_files = find_markdown_files("working")
+    working_files = find_markdown_files("working/pages_markdown_staged")
 
     if not working_files:
-        print("\nNo markdown files found in working/ directory.")
-        print("Add .md files to working/YYYY/ to get started.\n")
+        print("\nNo markdown files found in working/pages_markdown_staged/ directory.")
+        print("Add .md files to working/pages_markdown_staged/ to get started.\n")
         input("Press Enter to return to main menu...")
         return
 

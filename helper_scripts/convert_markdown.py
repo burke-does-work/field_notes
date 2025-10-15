@@ -2,7 +2,7 @@ import subprocess
 from pathlib import Path
 
 # Define the base directories used for conversion
-MARKDOWN_DIR = "markdown"
+MARKDOWN_DIR = "docs/pages_markdown"
 DOCS_DIR = "docs"
 HTML_TEMPLATE_FILE = "docs/static/template.html"
 
@@ -43,11 +43,8 @@ def convert_all_markdown_files():
 
     # Find all markdown files recursively
     for markdown_file in markdown_dir.rglob('*.md'):
-        # Calculate the relative path from the markdown directory
-        relative_path = markdown_file.parent.relative_to(markdown_dir)
-
-        # Create corresponding output directory in docs folder
-        output_dir = Path(DOCS_DIR) / relative_path
+        # Output all HTML to docs/pages/ (flat structure)
+        output_dir = Path(DOCS_DIR) / "pages"
         output_dir.mkdir(parents=True, exist_ok=True)
 
         # Change file extension from .md to .html
@@ -93,11 +90,8 @@ def convert_specific_files(file_list):
             print(f"Warning: File not in {MARKDOWN_DIR}/ directory: {markdown_file}")
             continue
 
-        # Calculate the relative path from the markdown directory
-        relative_path = markdown_file.parent.relative_to(MARKDOWN_DIR)
-
-        # Create corresponding output directory in docs folder
-        output_dir = Path(DOCS_DIR) / relative_path
+        # Output all HTML to docs/pages/ (flat structure)
+        output_dir = Path(DOCS_DIR) / "pages"
         output_dir.mkdir(parents=True, exist_ok=True)
 
         # Change file extension from .md to .html
