@@ -1,78 +1,83 @@
 # Field Notes - Project Overview
 
+PROJECT_OVERVIEW.md = what and why, ARCHITECTURE.md = how and technical details.
+
 ## Project Name
+
 **Field Notebook**
 
 ## Project Description
 
-The project contains the workflow for the development of the Field Notebook.
+Platform for writing and publishing field notes as markdown files converted to styled HTML pages.
 
 ## Purpose & Goals
 
-The project serves both as a platform for writing and the writing itself.
-
 ### Platform goal
 
-The platform goal is to serve as a platform for writing - the end game is a simple system to enable concise and efficient writing to be published regulary.
+Simple system for efficient writing and regular publishing with minimal friction.
 
 ### Field notebook goal
 
-Notes to my future self, publicly available.
+Notes to my future self, publicly available. Each entry should be interesting six months later. Benefit to others is secondary.
 
-The entry should be interesting to me, if I read it 6 months from now. I'd like others to benefit from reading the entries, but this is a secondary goal.
-
-This is the platform for writing - all writing is focused here, not sprawled elsewhere to use cognitive budget efficiently.
-
-There's no restriction on entry length (long or short).
+All writing is focused here to use cognitive budget efficiently. No restriction on entry length.
 
 ## Key Features
 
-### Current features and workflow
+**Publishing workflow:**
+- Draft in `working/`, publish to `markdown/`, convert to HTML in `pages/`
+- Interactive CLI with metadata validation
+- Automatic image handling and path updates
 
-- Write notebook entries in Markdown in the `working` directory.
-- Use Markdown heading structure and one journal template defined in the HTML template and CSS file.
-- Convert Markdown to HTML via a Python script and is previewed with Flask.
-- Copy final draft files to the pages directory.
-- Push to Github pages for hosting and sharing.
+**Styling:**
+- Centered layout with Open Sans typography
+- Raspberry-colored headings
+- Responsive images with borders
 
-### Core Technologies
-
-- **Language:** Python 3.x
-- **Web Framework:** Flask
-- **Templating:** Pandoc
-- **Styling:** CSS
-
-### Dependencies
-
-- Flask
-- Pandoc (external)
+**Technologies:**
+- Python/Flask for workflow and development server
+- Pandoc for markdown conversion
+- GitHub Pages for hosting
 
 ## Project Status
 
 - [x] Concept/Planning
-- [ ] Early Development
-- [ ] MVP Complete
+- [x] Early Development
+- [x] MVP Complete
+
+**Completed:**
+- Publishing workflow (working → markdown → pages)
+- Flask routing and development server
+- Styling system with responsive layout
+- Image handling and path management
+- Interactive CLI menu system
 
 ## Success Metrics
 
-- Limited friction to publishing - measure by number of times the workflow (not the writing itself) limits publishing
-- Published entries are readable without basic distractions - measure by no dead links, font, heading consistency, no "placeholders"
+**Primary:**
+- Publishing friction: Workflow enables quick note publishing
+- Readability: Consistent formatting, no dead links, clean styling
+
+**Achieved:**
+- Single command publishing workflow
+- Automated image and path management
+- Professional, consistent styling
+- Local preview before deployment
 
 ## Constraints & Limitations
 
-### Known Limitations
+- Static site only
+- Single template design
+- Requires local Pandoc installation
+- GitHub Pages repository size limit (~1 GB)
 
-- Dynamic webpage behavior
-- Template choices for entries
+## Style Guidelines
 
-### Technical Constraints
-
-- Static webpages only on Github pages
-- Repo size (~ 1 GB) on Github with a free account
-
-## Future Vision
-
-[TO BE COMPLETED: Where do you see this project in 6-12 months?]
+**Voice:** First-person ("I") and imperative (not "you")
+**Commits:** Conventional Commits format
+**Code:** PEP8 for Python
+**Markdown:** See MARKDOWN_STYLE_GUIDE.md
+**Language:** American English, Buzzfeed → AP → Chicago style hierarchy
 
 ## License
 

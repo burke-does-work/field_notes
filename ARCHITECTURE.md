@@ -1,275 +1,201 @@
 # Field Notes - Technical Architecture
 
+PROJECT_OVERVIEW.md = what and why, ARCHITECTURE.md = how and technical details.
+
 ## System Overview
-[TO BE COMPLETED: Provide a high-level description of how the system works]
 
-This is a Flask-based web application that converts markdown field notes into HTML pages for viewing in a browser.
-
-## Architecture Diagram
-[TO BE COMPLETED: Consider adding a diagram showing the system components and their relationships]
-
-```
-[User] --> [Flask App] --> [Pandoc] --> [HTML Pages]
-                |
-                v
-          [Static Assets]
-```
+Flask-based web application that manages markdown field notes through a publishing workflow, converting them to styled HTML pages served via development server or deployable to GitHub Pages.
 
 ## Directory Structure
 
 ```
 field_notes/
-├── app.py                      # Main Flask application
-├── requirements.txt            # Python dependencies
-├── markdown/                   # Source markdown files
-│   └── 2025/                  # Organized by year
-│       └── [field-notes].md   # Individual field notes
-├── pages/                      # Generated HTML output
-│   └── 2025/                  # Mirrors markdown structure
-│       └── [field-notes].html # Converted HTML files
-├── static/                     # Static assets
-│   ├── template.html          # Pandoc HTML template
-│   ├── styles.css             # Application styles
-│   └── media/                 # Images and other media
-└── working/                    # [TO BE COMPLETED: What is this for?]
+├── app.py                      # Flask app with publishing workflow
+├── requirements.txt            # Flask 3.0.0
+├── helper_scripts/
+│   ├── convert_markdown.py     # Pandoc conversion functions
+│   └── publish_note.py         # Publishing workflow helpers
+├── working/                    # Draft markdown files
+│   └── YYYY/
+│       ├── [note].md          # Draft field notes
+│       └── media/             # Draft images
+├── markdown/                   # Published markdown files
+│   └── YYYY/                  # Organized by year
+│       └── [note].md          # Published field notes
+└── pages/                      # Deployment folder (GitHub Pages)
+    ├── index.html             # Homepage listing all notes
+    ├── YYYY/
+    │   └── [note].html        # Converted HTML files
+    └── static/
+        ├── template.html      # Pandoc HTML template
+        ├── styles.css         # Site styling
+        └── media/             # Published images
 ```
 
 ## Core Components
 
-### 1. Flask Application (`app.py`)
+### Flask Application (`app.py`)
 
-**Purpose:** [TO BE COMPLETED: Describe the role of the Flask app]
-
-**Key Functions:**
-- `convert_markdown_to_html_with_pandoc(markdown_file, html_output_file)`
-  - [TO BE COMPLETED: Add more details about what this does]
-
-- `convert_all_markdown_files()`
-  - Recursively finds all `.md` files in `markdown/` directory
-  - Maintains directory structure in `pages/` output
-  - [TO BE COMPLETED: Add more details]
+**Purpose:** Interactive CLI for publishing workflow and development server
 
 **Routes:**
-- `GET /` - Homepage
-  - [TO BE COMPLETED: What should this display?]
-  - Current Status: TODO - needs implementation
+- `GET /` - Serves homepage (`pages/index.html`)
+- `GET /<year>/<filename>` - Serves individual field notes from `pages/`
 
-[TO BE COMPLETED: Add more routes as they are implemented]
+**Flask Configuration:**
+- `template_folder='pages'` - Serves HTML from pages directory
+- `static_folder='pages/static'` - Serves static assets from pages/static
+- `static_url_path='/static'` - Static files accessible at `/static`
 
-### 2. Markdown Processing
+**Menu Options:**
+1. Publish and convert field notes (integrated workflow)
+2. Convert all markdown to HTML
+3. Start Flask development server
+4. Exit
 
-**Input:** Markdown files in `markdown/` directory
+### Publishing Workflow (`helper_scripts/publish_note.py`)
 
-**Process:**
-1. [TO BE COMPLETED: Describe the conversion process step-by-step]
-2. Pandoc converts markdown to HTML using `static/template.html`
-3. Output is written to corresponding path in `pages/` directory
+**Process:** `working/` → `markdown/` → `pages/` (HTML)
 
-**YAML Front Matter Support:**
-- `title` - Page title
-- `author` - Author name
-- `date` - Publication date
-- `description` - Meta description
-- [TO BE COMPLETED: Add any custom fields]
+**Steps:**
+1. Parse YAML front matter for metadata validation
+2. Find image references in markdown
+3. Copy markdown file to `markdown/` directory
+4. Move images to `pages/static/media/` (or copy if shared)
+5. Update image paths to `/static/media/[filename]`
 
-### 3. HTML Template (`static/template.html`)
+**Image Handling:**
+- Unique images: Moved from `working/YYYY/media/` to `pages/static/media/`
+- Shared images: Copied (remain in working for other notes)
 
-**Purpose:** Provides consistent structure for all generated pages
+### Markdown Conversion (`helper_scripts/convert_markdown.py`)
 
-**Features:**
-- Responsive meta viewport
-- Conditional metadata from YAML front matter
-- Links to `styles.css` for styling
-- [TO BE COMPLETED: Add more features]
+**Tool:** Pandoc with custom HTML template
+
+**Configuration:**
+- Template: `pages/static/template.html`
+- Input: `markdown/YYYY/[note].md`
+- Output: `pages/YYYY/[note].html`
+- Maintains directory structure
+
+**YAML Front Matter:**
+- `title` - Required, page title
+- `date` - Required, publication date
+- `tags` - Optional, list of tags
+- `author` - Optional
+- `description` - Optional
+
+### HTML Template (`pages/static/template.html`)
+
+Pandoc template with conditional metadata rendering.
 
 **Variables:**
-- `$title$` - From YAML front matter
+- `$title$` - Page title
 - `$body$` - Converted markdown content
-- `$author$` - Optional author metadata
-- `$date$` - Optional date metadata
-- `$description$` - Optional description metadata
+- `$author$` - Author metadata
+- `$date$` - Publication date
+- `$description$` - Meta description
 
-### 4. Styling (`static/styles.css`)
+### Styling (`pages/static/styles.css`)
 
-**Current Status:** [TO BE COMPLETED: Is this file populated?]
+**Layout:**
+- Centered 800px max-width container
+- 20px padding, auto margins
 
-**Planned Styles:**
-- [TO BE COMPLETED: What styling approach will you use?]
-- Typography
-- Layout
-- Responsive design
-- [Add more]
+**Typography:**
+- Font: Open Sans (Google Fonts)
+- H1: Raspberry background (#8B1538), white text
+- H2-H5: Raspberry text, H2 with bottom border
+
+**Images:**
+- Max-width 95%, centered
+- Dark gray borders (#333) top and bottom
+- Maintains aspect ratio
 
 ## Data Flow
 
-### Content Publishing Flow
+### Publishing Workflow
+
 ```
-1. Write markdown file → markdown/YYYY/filename.md
-2. Start Flask app (or reload)
-3. app.py runs convert_all_markdown_files()
-4. Pandoc processes each .md file
-5. HTML output → pages/YYYY/filename.html
-6. User accesses via Flask route
+1. Write draft → working/YYYY/note.md
+2. Add images → working/YYYY/media/
+3. Run app.py → Menu option 1
+4. Select files to publish
+5. Files copied → markdown/YYYY/
+6. Images moved/copied → pages/static/media/
+7. HTML generated → pages/YYYY/
+8. View in browser via Flask server
 ```
-
-[TO BE COMPLETED: Add more detail to each step if needed]
-
-## Technology Decisions
-
-### Why Flask?
-[TO BE COMPLETED: Why did you choose Flask over other frameworks?]
-
-### Why Pandoc?
-[TO BE COMPLETED: Why Pandoc instead of a Python markdown library?]
-
-### Why Static Generation?
-[TO BE COMPLETED: Why generate HTML files instead of converting on-the-fly?]
 
 ## Configuration
 
-### Environment Variables
-[TO BE COMPLETED: List any environment variables]
-- Variable 1: Purpose
-- Variable 2: Purpose
+### Constants
 
-### Constants (in `app.py`)
-- `MARKDOWN_DIR = "markdown"` - Source directory for field notes
-- `PAGES_DIR = "pages"` - Output directory for HTML
-- `HTML_TEMPLATE_FILE = "static/template.html"` - Pandoc template path
+**`helper_scripts/convert_markdown.py`:**
+- `MARKDOWN_DIR = "markdown"`
+- `PAGES_DIR = "pages"`
+- `HTML_TEMPLATE_FILE = "pages/static/template.html"`
+
+**`helper_scripts/publish_note.py`:**
+- `WORKING_DIR = "working"`
+- `MARKDOWN_DIR = "markdown"`
+- `STATIC_MEDIA_DIR = "pages/static/media"`
 
 ## Dependencies
 
-### Python Dependencies
-- **Flask 3.0.0** - Web framework
-  - [TO BE COMPLETED: Why this version?]
+**Python:**
+- Flask 3.0.0
 
-### External Dependencies
-- **Pandoc** - Document converter
-  - [TO BE COMPLETED: Minimum version required?]
-  - [TO BE COMPLETED: Installation instructions?]
+**External:**
+- Pandoc (document conversion)
 
 ## Development Workflow
 
-### Local Development
-[TO BE COMPLETED: How do you run this locally?]
+### Setup
+
 ```bash
-# Example:
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate  # Linux/Mac
 pip install -r requirements.txt
-python app.py
 ```
 
 ### Adding New Field Notes
-[TO BE COMPLETED: What's the process for adding a new note?]
-1. Create markdown file in `markdown/YYYY/`
-2. Add YAML front matter
-3. Write content
-4. Restart Flask app (in development mode)
+
+1. Create `working/YYYY/note.md` with YAML front matter
+2. Add images to `working/YYYY/media/`
+3. Run `python app.py` (interactive menu)
+4. Select option 1 (Publish and convert)
+5. Select files to publish
+6. Preview at `http://127.0.0.1:5000/`
+
+### Command Line Options
+
+```bash
+python app.py              # Interactive menu (default)
+python app.py --serve      # Start server directly
+python app.py --convert-all # Convert all markdown
+python app.py --help       # Show help
+```
 
 ## Deployment
 
-### Deployment Strategy
-[TO BE COMPLETED: How will this be deployed?]
-- [ ] Local only
-- [ ] Heroku
-- [ ] AWS
-- [ ] Other: ___________
+**Target:** GitHub Pages
 
-### Build Process
-[TO BE COMPLETED: Are there any build steps before deployment?]
+**Process:**
+1. Push `pages/` directory contents to GitHub
+2. Configure GitHub Pages to serve from root or docs folder
+3. Static HTML files served directly by GitHub
 
-### Environment Configuration
-[TO BE COMPLETED: How do you configure for production vs development?]
+**Benefits:**
+- No server maintenance
+- Free hosting
+- Automatic HTTPS
+- Version control integration
 
-## Testing Strategy
+## Known Limitations
 
-### Current Testing
-[TO BE COMPLETED: What testing is in place?]
-- [ ] Unit tests
-- [ ] Integration tests
-- [ ] Manual testing
-
-### Testing TODO
-[TO BE COMPLETED: What testing needs to be added?]
-
-## Performance Considerations
-
-### Current Performance
-[TO BE COMPLETED: How does it perform now?]
-
-### Optimization Opportunities
-[TO BE COMPLETED: What could be improved?]
-- Caching converted HTML
-- Only convert changed files
-- [Add more]
-
-## Security Considerations
-
-### Current Security Measures
-[TO BE COMPLETED: What security is in place?]
-
-### Security TODO
-[TO BE COMPLETED: What security needs to be added?]
-- Input validation
-- XSS prevention
-- [Add more]
-
-## Error Handling
-
-### Current Error Handling
-[TO BE COMPLETED: How are errors handled?]
-- Pandoc conversion errors are caught and logged
-- [Add more]
-
-### Error Handling TODO
-[TO BE COMPLETED: What error handling needs to be added?]
-
-## Logging & Monitoring
-
-### Current Logging
-[TO BE COMPLETED: What is logged?]
-- Successful conversions
-- Pandoc errors
-- [Add more]
-
-### Monitoring TODO
-[TO BE COMPLETED: What monitoring should be added?]
-
-## Outstanding TODOs (from code)
-
-1. **Routing Structure** - Determine how to serve multiple field notes
-   - [TO BE COMPLETED: Document the planned approach]
-
-2. **Index Page** - Create homepage that lists all field notes
-   - [TO BE COMPLETED: Document the design]
-
-3. **Homepage Template** - Update to serve actual homepage
-   - [TO BE COMPLETED: What should it contain?]
-
-## Future Architecture Changes
-
-### Short-term (1-3 months)
-[TO BE COMPLETED: What architectural changes are planned soon?]
-
-### Long-term (6-12 months)
-[TO BE COMPLETED: What major architectural changes might be needed?]
-
-## Maintenance & Support
-
-### Maintenance Tasks
-[TO BE COMPLETED: What regular maintenance is needed?]
-
-### Known Issues
-[TO BE COMPLETED: Document any known bugs or issues]
-
-## References & Resources
-
-### Documentation
-[TO BE COMPLETED: Links to relevant documentation]
-- Flask: https://flask.palletsprojects.com/
-- Pandoc: https://pandoc.org/
-- [Add more]
-
-### Similar Projects
-[TO BE COMPLETED: Any projects that inspired this or that you reference?]
+- Static site only (no dynamic content)
+- Manual publishing workflow required
+- Single template design
+- No search functionality
+- Image processing requires local workflow
