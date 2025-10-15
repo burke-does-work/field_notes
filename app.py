@@ -15,6 +15,7 @@ from helper_scripts.publish_note import (
     find_image_references,
     publish_note
 )
+from helper_scripts.generate_index import main as generate_index
 
 # Initialize the Flask application
 app = Flask(__name__, template_folder='pages', static_folder='pages/static', static_url_path='/static')
@@ -205,7 +206,14 @@ def publish_and_convert_workflow():
 
         converted_count = convert_specific_files(published_files)
 
-        # Step 6: Display summary
+        # Step 6: Generate index.html
+        print("\n" + "━" * 60)
+        print("Step 3: Updating index")
+        print("━" * 60 + "\n")
+
+        generate_index()
+
+        # Step 7: Display summary
         print("\n" + "━" * 60)
         print("Summary")
         print("━" * 60)
@@ -277,6 +285,9 @@ def main_menu_loop():
 
             count = convert_all_markdown_files()
 
+            print("\nGenerating index.html...")
+            generate_index()
+
             print(f"\n✓ Converted {count} file(s)\n")
             input("Press Enter to return to main menu...")
 
@@ -332,7 +343,9 @@ if __name__ == "__main__":
             # Skip menu, convert all files
             print("Converting all markdown files to HTML...")
             count = convert_all_markdown_files()
-            print(f"✓ Converted {count} file(s)")
+            print("\nGenerating index.html...")
+            generate_index()
+            print(f"\n✓ Converted {count} file(s)")
 
         elif sys.argv[1] == '--help':
             print("Field Notes Manager")

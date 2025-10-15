@@ -1,7 +1,13 @@
 # Gitignore
 
 .vscode/
-media/
 working/
 .venv/
 .python-version
+__pycache__/
+
+# Ignore media in working directory only
+working/**/media/
+
+# Allow media in pages (deployment folder)
+!pages/static/media/
