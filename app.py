@@ -8,7 +8,9 @@ and serves the generated HTML pages via Flask.
 
 import sys
 from flask import Flask, render_template
-from helper_scripts.convert_markdown import convert_all_markdown_files, convert_specific_files
+from helper_scripts.convert_markdown import (
+    convert_all_markdown_files, convert_specific_files
+)
 from helper_scripts.publish_note import (
     find_markdown_files,
     parse_yaml_front_matter,
@@ -19,7 +21,6 @@ from helper_scripts.generate_index import main as generate_index
 
 # Initialize the Flask application
 app = Flask(__name__, template_folder='docs', static_folder='docs/static', static_url_path='/static')
-
 
 def display_file_list_with_metadata(working_files):
     """
