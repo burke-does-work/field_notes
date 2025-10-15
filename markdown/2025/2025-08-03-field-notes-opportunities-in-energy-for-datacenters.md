@@ -59,7 +59,7 @@ Talking points are a high-level outline to be both basic and comprehensive. Some
 
 Recession proofing for periods of overcapacity. Flexibility to scale down energy costs or target different data center use cases (i.e. not just tuned for model training)
 
-![decrepid data center](/static/media/decrepid_data_center.jpg)
+![decrepid data center](../static/media/decrepid_data_center.jpg)
 
 ## Deeper
 

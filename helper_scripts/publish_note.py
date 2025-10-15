@@ -180,9 +180,9 @@ def replace_markdown_image_path(match):
     alt_text = match.group(1)
     old_path = match.group(2) + match.group(3)  # Combine prefix and filename
 
-    # Extract filename and rewrite path
+    # Extract filename and rewrite path (relative path for GitHub Pages)
     filename = extract_image_filename(old_path)
-    new_path = f"/static/media/{filename}"
+    new_path = f"../static/media/{filename}"
 
     return f"![{alt_text}]({new_path})"
 
@@ -200,9 +200,9 @@ def replace_html_image_path(match):
     attributes = match.group(1)
     old_path = match.group(2)
 
-    # Extract filename and rewrite path
+    # Extract filename and rewrite path (relative path for GitHub Pages)
     filename = extract_image_filename(old_path)
-    new_path = f"/static/media/{filename}"
+    new_path = f"../static/media/{filename}"
 
     return f'<img {attributes}src="{new_path}"'
 
@@ -212,9 +212,9 @@ def update_image_paths(content):
     Update image paths in markdown content for publishing
 
     Changes:
-    - ./media/image.jpg → /static/media/image.jpg
-    - media/image.jpg → /static/media/image.jpg
-    - ../media/image.jpg → /static/media/image.jpg
+    - ./media/image.jpg → ../static/media/image.jpg
+    - media/image.jpg → ../static/media/image.jpg
+    - ../media/image.jpg → ../static/media/image.jpg
 
     Args:
         content: Markdown content string
