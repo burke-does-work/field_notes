@@ -2,89 +2,70 @@
 
 PROJECT_OVERVIEW.md = what and why, ARCHITECTURE.md = how and technical details.
 
-## Project Name
+## Project name
 
-**Field Notebook**
+**Field Notes**
 
-## Project Description
+## Project description
 
-Platform for writing and publishing field notes as markdown files converted to styled HTML pages.
+Field notes are notes to myself, made publicly available.
 
-## Purpose & Goals
+This is a platform for writing and publishing field notes. Field notes are written as markdown files, converted to styled HTML pages, and published to Github Pages.
+
+## Purpose & goals
 
 ### Platform goal
 
 Simple system for efficient writing and regular publishing with minimal friction.
 
-### Field notebook goal
+### Field notes goal
 
-Notes to my future self, publicly available. Each entry should be interesting six months later. Benefit to others is secondary.
+Each note is to still be of interest to me in 6 months, while any benefit from publishing is secondary.
 
-All writing is focused here to use cognitive budget efficiently. No restriction on entry length.
+Focuses writing here to use my cognitive budget efficiently and to track productivity.
 
-## Key Features
+## Key features
 
-**Publishing workflow:**
+### Publishing workflow
+
 - Draft in `working/`, publish to `markdown/`, convert to HTML in `docs/`
 - Interactive CLI with metadata validation
 - Automatic image handling and path updates
 
-**Styling:**
-- Centered layout with Open Sans typography
-- Raspberry-colored headings
-- Responsive images with borders
+### Technologies
 
-**Technologies:**
 - Python/Flask for workflow and development server
 - Pandoc for markdown conversion
 - GitHub Pages for hosting
 
-## Project Status
+## Project status
 
-- [x] Concept/Planning
-- [x] Early Development
-- [x] MVP Complete
+MVP complete.
 
-**Completed:**
 - Publishing workflow (working → markdown → docs)
 - Flask routing and development server
 - Styling system with responsive layout
 - Image handling and path management
 - Interactive CLI menu system
 
-## Success Metrics
+## Success metrics
 
-**Primary:**
 - Publishing friction: Workflow enables quick note publishing
-- Readability: Consistent formatting, no dead links, clean styling
+- Readability: Consistent formatting, no dead links, clean styling, etc.
 
-**Achieved:**
+### Achieved
+
 - Single command publishing workflow
 - Automated image and path management
-- Professional, consistent styling
 - Local preview before deployment
 
-## Constraints & Limitations
+## Constraints & limitations
 
-- Static site only
+- Static site
 - Single template design
-- Requires local Pandoc installation
 - GitHub Pages repository size limit (~1 GB)
-
-## Style Guidelines
-
-**Voice:** First-person ("I") and imperative (not "you")
-**Commits:** Conventional Commits format
-**Code:** PEP8 for Python
-**Markdown:** See MARKDOWN_STYLE_GUIDE.md
-**Language:** American English, Buzzfeed → AP → Chicago style hierarchy
+- Unordered index (e.g. no use of tags)
 
 ## License
 
 #TO BE COMPLETED: What license is this project under?
-
-## Contact & Support
-
-#TO BE COMPLETED: How can users get help or provide feedback?
-
-Feedback accepted and in some cases solicitated, but no direct contributions

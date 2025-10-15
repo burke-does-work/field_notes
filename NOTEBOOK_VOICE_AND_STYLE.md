@@ -75,3 +75,8 @@ Use these style guides in the following order:
 
 Use American English but vocabulary is flexible (e.g. Australianisms are not flagged in the style check).
 
+### Styling
+
+- Centered layout with Open Sans typography
+- Raspberry-colored headings
+- Responsive images with borders
