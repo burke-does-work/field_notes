@@ -9,5 +9,5 @@ __pycache__/
 # Ignore media in working directory only
 working/**/media/
 
-# Allow media in pages (deployment folder)
-!pages/static/media/
+# Allow media in docs (deployment folder)
+!docs/static/media/

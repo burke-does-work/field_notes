@@ -25,7 +25,7 @@ All writing is focused here to use cognitive budget efficiently. No restriction 
 ## Key Features
 
 **Publishing workflow:**
-- Draft in `working/`, publish to `markdown/`, convert to HTML in `pages/`
+- Draft in `working/`, publish to `markdown/`, convert to HTML in `docs/`
 - Interactive CLI with metadata validation
 - Automatic image handling and path updates
 
@@ -46,7 +46,7 @@ All writing is focused here to use cognitive budget efficiently. No restriction 
 - [x] MVP Complete
 
 **Completed:**
-- Publishing workflow (working → markdown → pages)
+- Publishing workflow (working → markdown → docs)
 - Flask routing and development server
 - Styling system with responsive layout
 - Image handling and path management

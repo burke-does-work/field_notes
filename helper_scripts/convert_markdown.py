@@ -3,8 +3,8 @@ from pathlib import Path
 
 # Define the base directories used for conversion
 MARKDOWN_DIR = "markdown"
-PAGES_DIR = "pages"
-HTML_TEMPLATE_FILE = "pages/static/template.html"
+DOCS_DIR = "docs"
+HTML_TEMPLATE_FILE = "docs/static/template.html"
 
 def convert_markdown_to_html_with_pandoc(markdown_file, html_output_file):
     '''Convert a single Markdown file to HTML using Pandoc'''
@@ -46,8 +46,8 @@ def convert_all_markdown_files():
         # Calculate the relative path from the markdown directory
         relative_path = markdown_file.parent.relative_to(markdown_dir)
 
-        # Create corresponding output directory in pages folder
-        output_dir = Path(PAGES_DIR) / relative_path
+        # Create corresponding output directory in docs folder
+        output_dir = Path(DOCS_DIR) / relative_path
         output_dir.mkdir(parents=True, exist_ok=True)
 
         # Change file extension from .md to .html
@@ -96,8 +96,8 @@ def convert_specific_files(file_list):
         # Calculate the relative path from the markdown directory
         relative_path = markdown_file.parent.relative_to(MARKDOWN_DIR)
 
-        # Create corresponding output directory in pages folder
-        output_dir = Path(PAGES_DIR) / relative_path
+        # Create corresponding output directory in docs folder
+        output_dir = Path(DOCS_DIR) / relative_path
         output_dir.mkdir(parents=True, exist_ok=True)
 
         # Change file extension from .md to .html

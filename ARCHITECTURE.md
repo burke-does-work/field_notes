@@ -22,7 +22,7 @@ field_notes/
 ├── markdown/                   # Published markdown files
 │   └── YYYY/                  # Organized by year
 │       └── [note].md          # Published field notes
-└── pages/                      # Deployment folder (GitHub Pages)
+└── docs/                      # Deployment folder (GitHub Pages)
     ├── index.html             # Homepage listing all notes
     ├── YYYY/
     │   └── [note].html        # Converted HTML files
@@ -39,12 +39,12 @@ field_notes/
 **Purpose:** Interactive CLI for publishing workflow and development server
 
 **Routes:**
-- `GET /` - Serves homepage (`pages/index.html`)
-- `GET /<year>/<filename>` - Serves individual field notes from `pages/`
+- `GET /` - Serves homepage (`docs/index.html`)
+- `GET /<year>/<filename>` - Serves individual field notes from `docs/`
 
 **Flask Configuration:**
-- `template_folder='pages'` - Serves HTML from pages directory
-- `static_folder='pages/static'` - Serves static assets from pages/static
+- `template_folder='docs'` - Serves HTML from docs directory
+- `static_folder='docs/static'` - Serves static assets from docs/static
 - `static_url_path='/static'` - Static files accessible at `/static`
 
 **Menu Options:**
@@ -55,17 +55,17 @@ field_notes/
 
 ### Publishing Workflow (`helper_scripts/publish_note.py`)
 
-**Process:** `working/` → `markdown/` → `pages/` (HTML)
+**Process:** `working/` → `markdown/` → `docs/` (HTML)
 
 **Steps:**
 1. Parse YAML front matter for metadata validation
 2. Find image references in markdown
 3. Copy markdown file to `markdown/` directory
-4. Move images to `pages/static/media/` (or copy if shared)
+4. Move images to `docs/static/media/` (or copy if shared)
 5. Update image paths to `/static/media/[filename]`
 
 **Image Handling:**
-- Unique images: Moved from `working/YYYY/media/` to `pages/static/media/`
+- Unique images: Moved from `working/YYYY/media/` to `docs/static/media/`
 - Shared images: Copied (remain in working for other notes)
 
 ### Markdown Conversion (`helper_scripts/convert_markdown.py`)
@@ -73,9 +73,9 @@ field_notes/
 **Tool:** Pandoc with custom HTML template
 
 **Configuration:**
-- Template: `pages/static/template.html`
+- Template: `docs/static/template.html`
 - Input: `markdown/YYYY/[note].md`
-- Output: `pages/YYYY/[note].html`
+- Output: `docs/YYYY/[note].html`
 - Maintains directory structure
 
 **YAML Front Matter:**
@@ -85,7 +85,7 @@ field_notes/
 - `author` - Optional
 - `description` - Optional
 
-### HTML Template (`pages/static/template.html`)
+### HTML Template (`docs/static/template.html`)
 
 Pandoc template with conditional metadata rendering.
 
@@ -96,7 +96,7 @@ Pandoc template with conditional metadata rendering.
 - `$date$` - Publication date
 - `$description$` - Meta description
 
-### Styling (`pages/static/styles.css`)
+### Styling (`docs/static/styles.css`)
 
 **Layout:**
 - Centered 800px max-width container
@@ -122,8 +122,8 @@ Pandoc template with conditional metadata rendering.
 3. Run app.py → Menu option 1
 4. Select files to publish
 5. Files copied → markdown/YYYY/
-6. Images moved/copied → pages/static/media/
-7. HTML generated → pages/YYYY/
+6. Images moved/copied → docs/static/media/
+7. HTML generated → docs/YYYY/
 8. View in browser via Flask server
 ```
 
@@ -133,13 +133,13 @@ Pandoc template with conditional metadata rendering.
 
 **`helper_scripts/convert_markdown.py`:**
 - `MARKDOWN_DIR = "markdown"`
-- `PAGES_DIR = "pages"`
-- `HTML_TEMPLATE_FILE = "pages/static/template.html"`
+- `DOCS_DIR = "docs"`
+- `HTML_TEMPLATE_FILE = "docs/static/template.html"`
 
 **`helper_scripts/publish_note.py`:**
 - `WORKING_DIR = "working"`
 - `MARKDOWN_DIR = "markdown"`
-- `STATIC_MEDIA_DIR = "pages/static/media"`
+- `STATIC_MEDIA_DIR = "docs/static/media"`
 
 ## Dependencies
 
@@ -182,7 +182,7 @@ python app.py --help       # Show help
 **Target:** GitHub Pages
 
 **Process:**
-1. Push `pages/` directory contents to GitHub
+1. Push `docs/` directory contents to GitHub
 2. Configure GitHub Pages to serve from root or docs folder
 3. Static HTML files served directly by GitHub
 

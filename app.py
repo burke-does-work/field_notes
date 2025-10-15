@@ -18,7 +18,7 @@ from helper_scripts.publish_note import (
 from helper_scripts.generate_index import main as generate_index
 
 # Initialize the Flask application
-app = Flask(__name__, template_folder='pages', static_folder='pages/static', static_url_path='/static')
+app = Flask(__name__, template_folder='docs', static_folder='docs/static', static_url_path='/static')
 
 
 def display_file_list_with_metadata(working_files):
@@ -122,7 +122,7 @@ def publish_and_convert_workflow():
     2. Displays interactive menu with metadata
     3. Gets user selection
     4. Publishes selected files (working/ → markdown/)
-    5. Converts published files (markdown/ → HTML in pages/)
+    5. Converts published files (markdown/ → HTML in docs/)
     6. Displays summary
     """
     print("\n" + "=" * 60)
@@ -178,10 +178,10 @@ def publish_and_convert_workflow():
             if result['images_moved'] or result['images_copied']:
                 print("  Images processed:")
                 for img in result['images_moved']:
-                    print(f"  ✓ Moved: {img} → pages/static/media/")
+                    print(f"  ✓ Moved: {img} → docs/static/media/")
                     print(f"    (unique to this file)")
                 for img, count in result['images_copied']:
-                    print(f"  ✓ Copied: {img} → pages/static/media/")
+                    print(f"  ✓ Copied: {img} → docs/static/media/")
                     print(f"    (shared - used in {count} files, kept in working/)")
                 print()
 

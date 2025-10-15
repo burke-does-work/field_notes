@@ -1,7 +1,7 @@
 """
 Generate index.html from published HTML pages
 
-This script scans the pages/ directory for published field notes and
+This script scans the docs/ directory for published field notes and
 generates an index.html page listing all available notes.
 """
 
@@ -9,8 +9,8 @@ from pathlib import Path
 import re
 
 
-PAGES_DIR = "pages"
-INDEX_FILE = "pages/index.html"
+DOCS_DIR = "docs"
+INDEX_FILE = "docs/index.html"
 
 
 def extract_metadata_from_html(html_file):
@@ -55,16 +55,16 @@ def find_published_notes():
     Returns:
         List of dicts with note information (url, title, date)
     """
-    pages_dir = Path(PAGES_DIR)
+    docs_dir = Path(DOCS_DIR)
 
-    if not pages_dir.exists():
-        print(f"Pages directory not found: {PAGES_DIR}")
+    if not docs_dir.exists():
+        print(f"Docs directory not found: {DOCS_DIR}")
         return []
 
     notes = []
 
     # Find all HTML files except index.html and template.html
-    for html_file in sorted(pages_dir.rglob('*.html'), reverse=True):
+    for html_file in sorted(docs_dir.rglob('*.html'), reverse=True):
         # Skip index.html and template.html
         if html_file.name in ['index.html', 'template.html']:
             continue
@@ -72,8 +72,8 @@ def find_published_notes():
         # Extract metadata from HTML
         metadata = extract_metadata_from_html(html_file)
 
-        # Build URL path (relative to pages/)
-        relative_path = html_file.relative_to(PAGES_DIR)
+        # Build URL path (relative to docs/)
+        relative_path = html_file.relative_to(DOCS_DIR)
         url_path = '/' + str(relative_path).replace('\\', '/')
 
         notes.append({
