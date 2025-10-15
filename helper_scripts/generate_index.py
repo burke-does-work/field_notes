@@ -102,7 +102,7 @@ def generate_index_html(notes):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Field Notes</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
     <h1>Field Notes</h1>
@@ -112,10 +112,12 @@ def generate_index_html(notes):
     <ul>
 '''
 
-    # Add each note as a list item
+    # Add each note as a list item (use relative paths)
     for note in notes:
         date_display = note['date'] if note['date'] != 'No date' else '(Draft)'
-        html += f'        <li><a href="{note["url"]}">{note["title"]}</a> - {date_display}</li>\n'
+        # Remove leading slash for relative path
+        relative_url = note["url"].lstrip('/')
+        html += f'        <li><a href="{relative_url}">{note["title"]}</a> - {date_display}</li>\n'
 
     html += '''    </ul>
 </body>
