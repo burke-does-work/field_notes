@@ -9,7 +9,6 @@ Workflow:
 Run: python app.py
 """
 
-import sys
 from flask import Flask, render_template
 from helper_scripts.convert_markdown import convert_all_markdown_files
 from helper_scripts.publish_note import (
@@ -22,7 +21,6 @@ from helper_scripts.generate_index import main as generate_index
 
 # Initialize the Flask application
 app = Flask(__name__, template_folder='docs', static_folder='docs/static', static_url_path='/static')
-
 
 def main():
     """
