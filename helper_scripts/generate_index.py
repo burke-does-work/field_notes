@@ -127,7 +127,9 @@ def generate_index_html(notes):
 
 
 def main():
-    """Main function to generate index.html"""
+    """
+    Main function to generate index.html
+    """
     print("Generating index.html...")
 
     # Find all published notes

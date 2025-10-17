@@ -10,7 +10,7 @@ Run: python app.py
 """
 
 from flask import Flask, render_template
-from helper_scripts.convert_markdown import convert_all_markdown_files
+from helper_scripts.convert_markdown import convert_markdown_files
 from helper_scripts.publish_note import (
     find_markdown_files,
     parse_yaml_front_matter,
@@ -122,7 +122,7 @@ def main():
     print("━" * 70 + "\n")
 
     print("Converting all markdown files to HTML...")
-    converted_count = convert_all_markdown_files()
+    converted_count = convert_markdown_files()
     print(f"✓ Converted {converted_count} file(s)\n")
 
     print("Generating index.html...")
