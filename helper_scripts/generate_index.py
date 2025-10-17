@@ -1,12 +1,11 @@
-"""
-Generate index.html from published HTML pages
+"""Generate Index Page from Published HTML Files.
 
 This script scans the docs/ directory for published field notes and
 generates an index.html page listing all available notes.
 """
 
-from pathlib import Path
 import re
+from pathlib import Path
 
 
 DOCS_DIR = "docs"
@@ -14,24 +13,21 @@ INDEX_FILE = "docs/index.html"
 
 
 def extract_metadata_from_html(html_file):
-    """
-    Extract title and date from HTML file
+    """Extract title and date from HTML file.
 
     Args:
-        html_file: Path to HTML file
+        html_file: Path to HTML file.
 
     Returns:
-        Dict with title and date, or None if extraction fails
+        Dict with title and date keys.
     """
     try:
         with open(html_file, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # Extract title from <title> tag
         title_match = re.search(r'<title>(.*?)</title>', content)
         title = title_match.group(1) if title_match else html_file.stem
 
-        # Extract date from meta tag
         date_match = re.search(r'<meta name="date" content="(.*?)"', content)
         date = date_match.group(1) if date_match else 'No date'
 
@@ -49,11 +45,10 @@ def extract_metadata_from_html(html_file):
 
 
 def find_published_notes():
-    """
-    Find all published HTML files and extract metadata
+    """Find all published HTML files and extract metadata.
 
     Returns:
-        List of dicts with note information (url, title, date)
+        List of dicts with note information (url, title, date, file).
     """
     docs_dir = Path(DOCS_DIR)
 
@@ -63,16 +58,12 @@ def find_published_notes():
 
     notes = []
 
-    # Find all HTML files except index.html and template.html
     for html_file in sorted(docs_dir.rglob('*.html'), reverse=True):
-        # Skip index.html and template.html
         if html_file.name in ['index.html', 'template.html']:
             continue
 
-        # Extract metadata from HTML
         metadata = extract_metadata_from_html(html_file)
 
-        # Build URL path (relative to docs/)
         relative_path = html_file.relative_to(DOCS_DIR)
         url_path = '/' + str(relative_path).replace('\\', '/')
 
@@ -87,14 +78,13 @@ def find_published_notes():
 
 
 def generate_index_html(notes):
-    """
-    Generate index.html content
+    """Generate index.html content.
 
     Args:
-        notes: List of note dictionaries
+        notes: List of note dictionaries.
 
     Returns:
-        String containing complete HTML
+        String containing complete HTML.
     """
     html = '''<!DOCTYPE html>
 <html lang="en">
@@ -112,12 +102,15 @@ def generate_index_html(notes):
     <ul>
 '''
 
-    # Add each note as a list item (use relative paths)
     for note in notes:
-        date_display = note['date'] if note['date'] != 'No date' else '(Draft)'
-        # Remove leading slash for relative path
+        date_display = (
+            note['date'] if note['date'] != 'No date' else '(Draft)'
+        )
         relative_url = note["url"].lstrip('/')
-        html += f'        <li><a href="{relative_url}">{note["title"]}</a> - {date_display}</li>\n'
+        html += (
+            f'        <li><a href="{relative_url}">{note["title"]}</a> - '
+            f'{date_display}</li>\n'
+        )
 
     html += '''    </ul>
 </body>
@@ -127,12 +120,9 @@ def generate_index_html(notes):
 
 
 def main():
-    """
-    Main function to generate index.html
-    """
+    """Generate index.html from all published notes."""
     print("Generating index.html...")
 
-    # Find all published notes
     notes = find_published_notes()
 
     if not notes:
@@ -141,10 +131,8 @@ def main():
 
     print(f"Found {len(notes)} published note(s)")
 
-    # Generate HTML
     html_content = generate_index_html(notes)
 
-    # Write to file
     index_path = Path(INDEX_FILE)
     index_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -153,7 +141,6 @@ def main():
 
     print(f"✓ Generated: {INDEX_FILE}")
 
-    # List notes
     for note in notes:
         print(f"  - {note['title']} ({note['date']})")
 

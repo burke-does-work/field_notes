@@ -1,30 +1,40 @@
-"""
-Field Notes - Main Application
+"""Field Notes - Main Application.
 
 Workflow:
-1. Publish all staged markdown files
-2. Rebuild website from all published markdown
-3. Start Flask development server
+    1. Publish all staged markdown files
+    2. Rebuild website from all published markdown
+    3. Start Flask development server
 
 Run: python app.py
 """
 
 from flask import Flask, render_template
+
 from helper_scripts.convert_markdown import convert_markdown_files
+from helper_scripts.generate_index import main as generate_index
 from helper_scripts.publish_note import (
     find_markdown_files,
-    parse_yaml_front_matter,
     find_image_references,
+    parse_yaml_front_matter,
     publish_note
 )
-from helper_scripts.generate_index import main as generate_index
 
 # Initialize the Flask application
-app = Flask(__name__, template_folder='docs', static_folder='docs/static', static_url_path='/static')
+app = Flask(
+    __name__,
+    template_folder='docs',
+    static_folder='docs/static',
+    static_url_path='/static'
+)
+
 
 def main():
-    """
-    Main workflow: Publish staged files, rebuild website, start server
+    """Execute main publishing workflow.
+
+    Steps:
+        1. Find and publish staged markdown files
+        2. Rebuild entire website from all published markdown
+        3. Start Flask development server for local preview
     """
     print("\n" + "=" * 70)
     print("Field Notes - Publishing and Development Server")
@@ -54,7 +64,7 @@ def main():
                     content = f.read()
                 image_refs = find_image_references(content)
                 image_count = len(image_refs)
-            except:
+            except Exception:
                 image_count = 0
 
             print(f"  • {file_path.name}")
@@ -89,10 +99,12 @@ def main():
 
                 if result['images_copied']:
                     for img, count in result['images_copied']:
-                        print(f"  ✓ Copied image: {img} (used in {count} files)")
+                        msg = f"  ✓ Copied image: {img} (used in {count} files)"
+                        print(msg)
 
                 if result['paths_updated'] > 0:
-                    print(f"  ✓ Updated {result['paths_updated']} image path(s)")
+                    count = result['paths_updated']
+                    print(f"  ✓ Updated {count} image path(s)")
 
                 # Collect warnings
                 if result['warnings']:
@@ -145,17 +157,27 @@ def main():
         print("=" * 70 + "\n")
 
 
-# Flask routes
-
 @app.route("/")
 def home():
-    """Homepage route - serves the index page"""
+    """Serve the homepage/index page.
+
+    Returns:
+        Rendered index.html template.
+    """
     return render_template('index.html')
 
 
 @app.route("/<path:year>/<path:filename>")
 def serve_note(year, filename):
-    """Serve individual field note HTML files"""
+    """Serve individual field note HTML files.
+
+    Args:
+        year: Directory path (e.g., 'pages').
+        filename: HTML filename to serve.
+
+    Returns:
+        Rendered HTML template for the requested note.
+    """
     return render_template(f'{year}/{filename}')
 
 
