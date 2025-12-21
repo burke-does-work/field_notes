@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Conditional metadata from YAML front matter -->
+                <meta name="date" content="2025-12-21">
+            <title>Project Plan: Data Center Energy Demand Drivers</title>
+        <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <!-- Converted markdown content -->
+    <h1 id="project-plan-data-center-energy-demand-drivers">Project Plan: Data Center Energy Demand Drivers</h1>
+    <figure>
+    <img src="../static/media/decrepid_data_center.jpg" alt="" /><figcaption>Energy via photosynthesis</figcaption>
+    </figure>
+    <h2 id="overview">Overview</h2>
+    <p>There are many forecasts for data center energy demand. Most, if not all, of the fundamental-based models use company announcements and utility interconnection requests to derive energy demand.</p>
+    <p>This project develops an architecture to forecast future energy demand from data centers based on data center infrastructure design.</p>
+    <p>Data center design is the driver of energy demand, not a utility interconnection queue.</p>
+    <h2 id="approach">Approach</h2>
+    <p>Determine data center power demand based on key drivers, such as:</p>
+    <ul>
+    <li>Chip specs/generation</li>
+    <li>Chip utiliziation</li>
+    <li>Data center light &amp; power</li>
+    </ul>
+    <p>By going a layer deeper, the user can flex the drivers in key ways:</p>
+    <ul>
+    <li>Data center infrastructure specialization, i.e. CPU, GPU, or storage</li>
+    <li>Evolution of chip and support infrastructure energy efficiency over time</li>
+    </ul>
+    <h3 id="benchmarking">Benchmarking</h3>
+    <p>The standard approach to data center energy modeling is to take the utility interconnection queue and moderate it down based on the expectations for interconnection and utilization over time.</p>
+    <p>Or, to aggregate regional outlooks as published governments and NGOs, regardless of inconsistencies across forecasts.</p>
+    <p>Issues with this approach:</p>
+    <p>This approach is useful but limited. With this approach, it’s hard to build in a picture of the evolution of AI and compute over time. It tends towards a binary discussion on whether or not data center build will happen.</p>
+    <p>An interconnection-based forecast quantifies the demand, which is miles better than the mind-numbing punditry on whether we are in a bubble or not.</p>
+    <p>But in the end, data center build is happening, it’s just a matter of what it’ll look like over time.</p>
+    <h2 id="starting-point">Starting point</h2>
+    <p>Primary focus for MVP: Research energy demand by data center infrastructure types.</p>
+    <p>Secondary focus but necessary: Aggregate regional capacity build data.</p>
+    <p>Base data is required to build out the model, but the focus for the initial product is on the relationship of the drivers in the framework.</p>
+    <h2 id="work-structure">Work structure</h2>
+    <p><strong>TBD</strong>. Throwing stuff down so there’s something:</p>
+    <p>The build-out will take awhile so perhaps best to publish research findings as the model develops.</p>
+    <p>Delivery cadence: <strong>TBD</strong> First checkpoint: <strong>TBD</strong></p>
+    <p>Signals to look for to change direction: <strong>TBD</strong></p>
+    <h2 id="success-looks-like">Success looks like</h2>
+    <p>The final product will likely be a platform where data and assumptions can be loaded and updated.</p>
+</body>
+</html>
