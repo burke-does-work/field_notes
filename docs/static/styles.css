@@ -51,3 +51,11 @@ img {
     border-bottom: 1px solid #333;
     padding: 10px 0;
 }
+
+/* Style figure captions to match image width */
+figcaption {
+    max-width: 95%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 5px;
+}

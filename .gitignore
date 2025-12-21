@@ -5,6 +5,7 @@ working/
 .venv/
 .python-version
 __pycache__/
+*.pyc
 
 # Ignore media in working directory only
 working/**/media/
