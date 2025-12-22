@@ -7,8 +7,13 @@ working/
 __pycache__/
 *.pyc
 
+
 # Ignore media in working directory only
 working/**/media/
 
 # Allow media in docs (deployment folder)
 !docs/static/media/
+
+# Claude stuff
+.claude/
+CLAUDE.md
