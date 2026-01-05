@@ -1,5 +1,7 @@
 # Field Notes - Project Overview
 
+**Doc purpose:** Overview of scripts (for writing, see [writing_guides](./writing_guides/)
+
 PROJECT_OVERVIEW.md = what and why, ARCHITECTURE.md = how and technical details.
 
 ## Project name
@@ -68,4 +70,4 @@ MVP complete.
 
 ## License
 
-#TO BE COMPLETED: What license is this project under?
+#TODO: What license is this project under?

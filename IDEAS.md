@@ -8,6 +8,7 @@ Purpose: dump for future dev ideas for platform (not for writing)
 ## Claude ideas
 
 - Interactive menu system with options to:
+
   - Selectively publish individual files (choose which staged files to publish)
   - Publish only without rebuilding entire site
   - Rebuild site without publishing
