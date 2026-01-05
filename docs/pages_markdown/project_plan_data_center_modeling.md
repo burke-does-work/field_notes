@@ -6,7 +6,7 @@ tags: ["Energy", "Data Centers"]
 
 # Project Plan: Data Center Energy Demand Drivers
 
-![Energy via photosynthesis](../static/media/decrepid_data_center.jpg)
+![Energy via photosynthesis (Image: Gen AI)](../static/media/decrepid_data_center.jpg)
 
 ## Overview
 
