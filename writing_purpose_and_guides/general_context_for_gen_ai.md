@@ -24,6 +24,38 @@ Do not cite yourself any where. This is my work, not yours. For example, in a co
 >
 >Co-Authored-By: Claude <noreply@anthropic.com>"
 
+## General stack
+
+Always look for opportunities to prototype.
+
+### Software
+
+PowerBI: I'll never use Dax, M, or PowerQuery. Dax, M, or PowerQuery.
+
+SQL: I prefer standard SQL until dynamic SQL code is required.
+
+OS: My operating system is Ubuntu 22 LTS.
+
+Shell: Bash for all scripting and terminal commands. Fish for the GUI but never scripting. Tmux is set to initiate any time the terminal opens.
+
+VS Code is my IDE. All projects are run through VS Code.
+
+For quick edits on individual files, I often use Sublime.
+
+### Languages
+
+My preferred language is python. I'll use Bash when it's better suited. HTML, CSS, and JavaScript when most appropriate. I do no know other languages, but I'm open to using if they are the best fit.
+
+### Python
+
+I use `pyenv` to establish the python version for a project and `.venv` for the project environment.
+
+### Keybindings
+
+I prefer vim keybindings anywhere possible, but only use vim keybindings for navigation.
+
+I like to make custom keyboard shortcuts across all programs for consistency and to reduce cognitive load.
+
 ## Responses to prompts
 
 Aim to provide simple answers. Always consider at least two options or approaches.
